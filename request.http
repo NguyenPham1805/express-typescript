@@ -1,0 +1,63 @@
+POST http://localhost:5000/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "trungnguyen",
+  "displayName": "TrungNguyen",
+  "email": "trungnguyen@email.com",
+  "password": "Trungnguyendepdai"
+}
+
+###
+POST http://localhost:5000/api/v1/auth/sign-in
+Content-Type: application/json
+
+{
+  "username": "trungnguyen",
+  "password": "Trungnguyendepdai"
+}
+
+###
+POST http://localhost:5000/api/v1/auth/refresh-token
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDY3MTg3MDMsImV4cCI6MTY0NjcxODg4M30.8ZK8n2M3qyEXa66Qow1P8u_L9Lwt1GU-iJEOQMyWHYA
+
+###
+GET http://localhost:5000/api/v1/post
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDcwNDg5MDMsImV4cCI6MTY0NzA0ODk1M30.mafvG7y7CTyM31qwSyPpggucE9iXnNGW-l9qUBKbZ4M
+
+###
+GET http://localhost:5000/api/v1/post/user/6226d07531a26451d135640a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDcwNDg5MDMsImV4cCI6MTY0NzA0ODk1M30.mafvG7y7CTyM31qwSyPpggucE9iXnNGW-l9qUBKbZ4M
+
+###
+POST http://localhost:5000/api/v1/post/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDcwNDg1ODUsImV4cCI6MTY0NzA0ODYzNX0.VikgsQN3ma6sn2qCqlEkrsuGtU9GBFPwU_UwacsZIfU
+
+{
+  "title": "The first post",
+  "body": "Body first post"
+}
+
+###
+POST http://localhost:5000/api/v1/post/update/0_pGuF77O1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDY3MjMzOTcsImV4cCI6MTY0NjcyMzU3N30.hXnk6WlWOiV94LQfYWsCx1AD20UpX80Y5I97rjEfjk0
+
+{
+  "title": "The second post",
+  "body": "Body second post"
+}
+
+###
+DELETE http://localhost:5000/api/v1/post/delete/Qik9c6zSRv
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDY3MjM3NjEsImV4cCI6MTY0NjcyMzgxMX0.97FkZ2EK7EtdgsPrrzY8G_pi3z7iWkA-JET8s3liS54
+#UiHw38oKPp
+#X26vfWPv9X
+#OAeWlBlQT7
+#6Pbzan5BB3
+#Qik9c6zSRv
+###
+
+
+

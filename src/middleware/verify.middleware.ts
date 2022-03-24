@@ -10,7 +10,10 @@ const verifyUserToken = (
   const refreshToken = req.cookies.refreshtoken
 
   if (!accessToken) {
-    res.status(401).json({ message: 'Bạn chưa đăng nhập' })
+    res.status(401).json({
+      message: 'Request has been blocked!',
+      error: 'You not Authorize'
+    })
     return
   }
   jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET!, (err, user) => {
@@ -23,7 +26,10 @@ const verifyUserToken = (
 
         // @ts-ignore
         if (!decode || !decode.id) {
-          res.status(401).json({ message: 'Bạn chưa đăng nhập' })
+          res.status(401).json({
+            message: 'Request has been blocked!',
+            error: 'You not Authorize'
+          })
           return
         }
 
@@ -48,15 +54,17 @@ const verifyUserToken = (
         // @ts-ignore
         req.user = decode
         next()
-        return
+      } else {
+        res.status(401).json({
+          message: 'Request has been blocked!',
+          error: 'You not Authorize'
+        })
       }
-      res.status(401).json({ message: 'Bạn chưa đăng nhập' })
-      return
+    } else {
+      // @ts-ignore
+      req.user = user
+      next()
     }
-    // @ts-ignore
-    req.user = user
-    next()
-    return
   })
 }
 

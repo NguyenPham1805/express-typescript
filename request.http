@@ -2,10 +2,10 @@ POST http://localhost:5000/api/v1/auth/register
 Content-Type: application/json
 
 {
-  "username": "trungnguyen",
-  "displayName": "TrungNguyen",
-  "email": "trungnguyen@email.com",
-  "password": "Trungnguyendepdai"
+  "username": "Toanle",
+  "displayName": "Toan le",
+  "email": "toanle@email.com",
+  "password": "Toanlephevat"
 }
 
 ###
@@ -13,9 +13,13 @@ POST http://localhost:5000/api/v1/auth/sign-in
 Content-Type: application/json
 
 {
-  "username": "trungnguyen",
+  "emailOrUsername": "trungnguyen",
   "password": "Trungnguyendepdai"
 }
+
+###
+POST http://localhost:5000/api/v1/auth/sign-out
+Authorization: Bearer refreshtoken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDc5MTU2MjMsImV4cCI6MTY3OTQ3MzIyM30.8AUVltNrnGaamh2y0UqHkn3Pk_YujRQ3HK58Cj5XWNM
 
 ###
 POST http://localhost:5000/api/v1/auth/refresh-token
@@ -23,10 +27,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1M
 
 ###
 GET http://localhost:5000/api/v1/post
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDcwNDg5MDMsImV4cCI6MTY0NzA0ODk1M30.mafvG7y7CTyM31qwSyPpggucE9iXnNGW-l9qUBKbZ4M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDgwMjYwMjQsImV4cCI6MTY0ODAzMzIyNH0.Y6qy3HhcQ7wjbfM7lW0fp7pe9iQ2SWFQbRGcS36FUgk
 
 ###
 GET http://localhost:5000/api/v1/post/user/6226d07531a26451d135640a
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDcwNDg5MDMsImV4cCI6MTY0NzA0ODk1M30.mafvG7y7CTyM31qwSyPpggucE9iXnNGW-l9qUBKbZ4M
+
+###
+GET http://localhost:5000/api/v1/user/6226d07531a26451d135640a
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDcwNDg5MDMsImV4cCI6MTY0NzA0ODk1M30.mafvG7y7CTyM31qwSyPpggucE9iXnNGW-l9qUBKbZ4M
 
 ###
@@ -35,8 +43,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjZkMDc1MzFhMjY0NTFkMTM1NjQwYSIsInVzZXJuYW1lIjoidHJ1bmduZ3V5ZW4iLCJpYXQiOjE2NDcwNDg1ODUsImV4cCI6MTY0NzA0ODYzNX0.VikgsQN3ma6sn2qCqlEkrsuGtU9GBFPwU_UwacsZIfU
 
 {
-  "title": "The first post",
-  "body": "Body first post"
+  "title": "Củ cải"
 }
 
 ###

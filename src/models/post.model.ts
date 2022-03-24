@@ -5,7 +5,6 @@ import { UserDocument } from './user.model'
 export interface PostDocument extends Document {
   userId: UserDocument['_id']
   title: string
-  body?: string
   image?: string
   createAt: Date
   updateAt: Date
@@ -21,7 +20,6 @@ const postSchema = new Schema(
       default: () => nanoid(10)
     },
     title: { type: String, required: true },
-    body: { type: String },
     image: { type: String }
   },
   { timestamps: true }

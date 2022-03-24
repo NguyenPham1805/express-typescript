@@ -8,8 +8,8 @@ class PostController {
       const userId = req.user.id
       const data = req.body
 
-      const post = await PostModel.create({ userId, ...data })
-      res.send({ post })
+      await PostModel.create({ userId, ...data, image: req.file?.filename })
+      res.status(200).json({ message: 'create successfully', image: req.file })
     } catch (err) {
       res.status(500).json(err)
     }
@@ -20,11 +20,12 @@ class PostController {
       const postId = req.params.id
       const updateData = req.body
 
-      const updatePost = await PostModel.updateOne({ postId }, updateData, {
+      // @ts-ignore
+      await PostModel.updateOne({ postId, userId: req.user.id }, updateData, {
         new: true
       })
 
-      res.send(updatePost)
+      res.status(200).json({ message: 'update successfully' })
     } catch (err) {
       res.status(500).json(err)
     }
@@ -40,11 +41,37 @@ class PostController {
     }
   }
 
-  public static async getPosts(req: Request, res: Response): Promise<void> {
+  public static async getPosts(_req: Request, res: Response): Promise<void> {
     try {
-      const posts = await PostModel.find()
+      const posts = await PostModel.aggregate([
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'userId',
+            foreignField: '_id',
+            as: 'user'
+          }
+        },
+        {
+          $addFields: {
+            displayName: { $arrayElemAt: ['$user.displayName', 0] }
+          }
+        },
+        {
+          $project: {
+            postId: 1,
+            userId: 1,
+            title: 1,
+            image: 1,
+            createdAt: 1,
+            updatedAt: 1,
+            displayName: 1
+          }
+        },
+        { $sort: { createdAt: -1 } }
+      ])
       if (!posts) {
-        res.status(404).json({ mesage: 'Không có bài viết nào' })
+        res.status(404).json({ mesage: 'No post' })
         return
       }
       res.status(200).json(posts)
@@ -56,9 +83,9 @@ class PostController {
   public static async getPostsUser(req: Request, res: Response): Promise<void> {
     try {
       const userId = req.params.id
-      const posts = await PostModel.find({ userId })
+      const posts = await PostModel.find({ userId }).sort({ createdAt: -1 })
       if (!posts) {
-        res.status(404).json('Chưa có bài viết nào!')
+        res.status(404).json('No post create!')
         return
       }
       res.status(200).json(posts)
@@ -69,8 +96,9 @@ class PostController {
 
   public static async deletePost(req: Request, res: Response): Promise<void> {
     try {
-      await PostModel.deleteOne({ postId: req.params.id })
-      res.status(200).json({ message: 'Xóa thành công' })
+      // @ts-ignore
+      await PostModel.deleteOne({ postId: req.params.id, userId: req.user.id })
+      res.status(200).json({ message: 'delete successfully' })
     } catch (err) {
       res.status(500).json(err)
     }

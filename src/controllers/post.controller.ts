@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import { Types } from 'mongoose'
 import PostModel from '../models/post.model'
 
 class PostController {
@@ -20,10 +21,14 @@ class PostController {
       const postId = req.params.id
       const updateData = req.body
 
-      // @ts-ignore
-      await PostModel.updateOne({ postId, userId: req.user.id }, updateData, {
-        new: true
-      })
+      await PostModel.updateOne(
+        // @ts-ignore
+        { postId, userId: req.user.id },
+        { ...updateData, image: req.file?.filename },
+        {
+          new: true
+        }
+      )
 
       res.status(200).json({ message: 'update successfully' })
     } catch (err) {
@@ -83,7 +88,34 @@ class PostController {
   public static async getPostsUser(req: Request, res: Response): Promise<void> {
     try {
       const userId = req.params.id
-      const posts = await PostModel.find({ userId }).sort({ createdAt: -1 })
+      const posts = await PostModel.aggregate([
+        { $match: { userId: new Types.ObjectId(userId) } },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'userId',
+            foreignField: '_id',
+            as: 'user'
+          }
+        },
+        {
+          $addFields: {
+            displayName: { $arrayElemAt: ['$user.displayName', 0] }
+          }
+        },
+        {
+          $project: {
+            postId: 1,
+            userId: 1,
+            title: 1,
+            image: 1,
+            createdAt: 1,
+            updatedAt: 1,
+            displayName: 1
+          }
+        },
+        { $sort: { createdAt: -1 } }
+      ])
       if (!posts) {
         res.status(404).json('No post create!')
         return

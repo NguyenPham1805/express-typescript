@@ -39,7 +39,7 @@ router.post(
   upload.single('postImage'),
   PostController.createPost
 )
-router.post(
+router.put(
   '/update/:id',
   verifyUserToken,
   upload.single('postImage'),

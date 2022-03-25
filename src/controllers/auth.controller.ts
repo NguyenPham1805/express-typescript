@@ -193,7 +193,7 @@ class AuthController {
       expiresIn: '2h'
     })
     const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET!, {
-      expiresIn: '1y'
+      expiresIn: '30d'
     })
 
     return { accessToken, refreshToken }
